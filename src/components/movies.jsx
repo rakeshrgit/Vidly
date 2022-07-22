@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
 import { getMovies } from '../services/fakeMovieService';
 import EditModal from '../common/editmodal'
+import Pagination from '../common/pagination';
+import {paginate} from '../utils/paginate';
 class Movies extends Component {
     state = { 
         requiredItem: 0,
         movies:getMovies(),
         movie: null,
-        isOpen:false
+        isOpen:false,
+        pageSize:4,
+        currentPage:1
      } 
      handleDelete = (movie) => {
         const movies = this.state.movies.filter(m=> m._id !== movie._id)
@@ -26,16 +30,20 @@ class Movies extends Component {
       }
         return movie;
     });
-
     this.setState({
       movies: updatedMovies,
       isOpen: false
     });
-
-
+    }
+    handlePageChange = (page) =>{
+        this.setState({ currentPage:page });    
+        //console.log('page', page)
     }
     render() { 
-        const{movies} = this.state;
+        const {length: count} = this.state.movies;
+        const {pageSize, currentPage, movies:allMovies} = this.state;
+        const movies = paginate(allMovies, currentPage, pageSize  )
+        //const{movies} = this.state;
        // console.log('movies', movies)
        if (movies.length === 0) return <p>No Data</p>;
         return (
@@ -69,6 +77,13 @@ class Movies extends Component {
                         
                     </tbody>
                 </table>
+                <Pagination
+                    itemsCount={count}
+                    pageSize={pageSize}
+                    currentPage={currentPage}
+                    onPageChanges={this.handlePageChange}
+
+                />
                 </div>
                 {
                     this.state.isOpen && <EditModal
