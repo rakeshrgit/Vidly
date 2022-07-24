@@ -74,7 +74,7 @@ class Movies extends Component {
                     </div>
                     <div className="col">
                     <div className="">
-                    <div>Showing {movies.length} movies</div>   
+                    <div>Showing {filtered.length} movies</div>   
                     <table className="table">
                         <thead>
                             <tr>
