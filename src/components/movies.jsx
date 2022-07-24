@@ -16,7 +16,7 @@ class Movies extends Component {
         currentPage:1
      } 
      componentDidMount() {
-        const genres = [{ _id: "", name: "All Genres" }, ...getGenres()];
+        //const genres = [{ _id: "", name: "All Genres" }, ...getGenres()];
 
         this.setState({ movies: getMovies(), genres:getGenres() });
      }
@@ -53,6 +53,7 @@ class Movies extends Component {
     render() { 
         const {length: count} = this.state.movies;
         const {pageSize, currentPage, selectedGenre, movies:allMovies} = this.state;
+        
         const filtered =
         selectedGenre && selectedGenre._id
           ? allMovies.filter(m => m.genre._id === selectedGenre._id)
@@ -68,13 +69,13 @@ class Movies extends Component {
                     <div className="col-3">
                         <ListGroup 
                             items={this.state.genres}
-                            selectedItem={this.state.selectedGenre}
+                            currentItem={this.state.selectedGenre}
                             onItemSelect={this.handleGenreSelect}
                         />
                     </div>
                     <div className="col">
                     <div className="">
-                    <div>Showing {movies.length} movies</div>   
+                    <div>Showing {filtered.length} movies</div>   
                     <table className="table">
                         <thead>
                             <tr>

@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import lodash from 'lodash';
 const Pagination = (props) => {
     const {itemsCount, pageSize, currentPage, onPageChanges} = props;
-    console.log('currentPage', currentPage)
+    //console.log('currentPage', currentPage)
     const pageCount = Math.ceil(itemsCount/pageSize);
     const pages = lodash.range(1, pageCount + 1);
+    if (pageCount === 1) return null;
     //console.log('pageCount', pageCount)
     return ( 
         <ul className="pagination">
