@@ -5,6 +5,7 @@ import EditModal from '../common/editmodal'
 import Pagination from '../common/pagination';
 import ListGroup from '../common/listGroup';
 import {paginate} from '../utils/paginate';
+import MoviesTable from './movieTable';
 class Movies extends Component {
     state = { 
         requiredItem: 0,
@@ -50,6 +51,9 @@ class Movies extends Component {
     handleGenreSelect = (genre) =>{
        this.setState({ selectedGenre:genre, currentPage: 1 })
     }
+    handleSort = (path) => {
+        console.log('xx')
+    }
     render() { 
         const {length: count} = this.state.movies;
         const {pageSize, currentPage, selectedGenre, movies:allMovies} = this.state;
@@ -70,45 +74,23 @@ class Movies extends Component {
                             items={this.state.genres}
                             selectedItem={this.state.selectedGenre}
                             onItemSelect={this.handleGenreSelect}
+                          
                         />
                     </div>
                     <div className="col">
                     <div className="">
                     <div>Showing {filtered.length} movies</div>   
-                    <table className="table">
-                        <thead>
-                            <tr>
-                                <th>Title</th>
-                                <th>Genre</th>
-                                <th>Stock</th>
-                                <th>Rate</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {movies.map(movie=> (
-                                <tr key={movie._id}>
-                                <td>{movie.title}</td>
-                                <td>{movie.genre.name}</td>
-                                <td>{movie.numberInStock}</td>
-                                <td>{movie.dailyRentalRate}</td>
-                                <td>
-                                    <button onClick={()=>this.handleDelete(movie)} className="btn btn-danger btn-sm" >Delete</button>
-                                    <button className="btn btn-primary btn-sm m-2" onClick={()=>this.openModal(movie)}>Edit</button>    
-                                </td>
-                            </tr>
-                            ))}
-                            
-                            
-                        </tbody>
-                    </table>
+                    <MoviesTable
+                        movies ={movies}
+                        onDelete={this.handleDelete}
+                        onOpenModal = {this.openModal}
+                    />
                     <Pagination
                         itemsCount={filtered.length}
                         pageSize={pageSize}
                         currentPage={currentPage}
                         onPageChanges={this.handlePageChange}
-
-                    />
+                     />
                     </div>
                     </div>
                     
