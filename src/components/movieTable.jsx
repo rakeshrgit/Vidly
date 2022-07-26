@@ -11,6 +11,7 @@ const MoviesTable = (props) => {
                     <th>Rate</th>
                     <th>Action</th>
                 </tr>
+                
             </thead>
             <tbody>
                 {movies.map(movie=> (
