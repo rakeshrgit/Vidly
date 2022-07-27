@@ -1,12 +1,29 @@
 import React, { Component } from 'react';
+import {BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Navbar from './common/navbar'
 import Movies from './components/movies';
+import Products from './components/products';
+import ProductDetails from './components/productdetails';
+import Notfound from './components/notfound'
+import Posts from './components/posts';
+import Home from './components/home'
 class App extends Component {
   state = {  } 
   render() { 
     return (
-      <main className="container">
-       <Movies/>
-      </main>
+      <div className="container">
+        <Router>
+        <Navbar/>
+        <Routes>
+          <Route path="products/:id" element={<ProductDetails/>} />
+          <Route exact path='/' element={<Home/>}/> 
+          <Route path='/products' element={<Products/>}/> 
+          <Route path='/posts' element={<Posts/>}/> 
+          <Route path='/dashboard' element={<Movies/>}/> 
+          <Route path="*" element={<Notfound/>}/>
+        </Routes>
+      </Router>
+      </div> 
     );
   }
 }
