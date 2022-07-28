@@ -68,42 +68,44 @@ class Movies extends Component {
        if (movies.length === 0) return <p>No Data</p>;
         return (
             <React.Fragment>
-                <div className="row">
-                    <div className="col-3">
-                        <ListGroup 
-                            items={this.state.genres}
-                            selectedItem={this.state.selectedGenre}
-                            onItemSelect={this.handleGenreSelect}
-                          
+                <div className="container">    
+                    <div className="row">
+                        <div className="col-3">
+                            <ListGroup 
+                                items={this.state.genres}
+                                selectedItem={this.state.selectedGenre}
+                                onItemSelect={this.handleGenreSelect}
+                            
+                            />
+                        </div>
+                        <div className="col">
+                        <div className="">
+                        <div>Showing {filtered.length} movies</div>   
+                        <MoviesTable
+                            movies ={movies}
+                            onDelete={this.handleDelete}
+                            onOpenModal = {this.openModal}
                         />
-                    </div>
-                    <div className="col">
-                    <div className="">
-                    <div>Showing {filtered.length} movies</div>   
-                    <MoviesTable
-                        movies ={movies}
-                        onDelete={this.handleDelete}
-                        onOpenModal = {this.openModal}
-                    />
-                    <Pagination
-                        itemsCount={filtered.length}
-                        pageSize={pageSize}
-                        currentPage={currentPage}
-                        onPageChanges={this.handlePageChange}
-                     />
-                    </div>
-                    </div>
-                    
-                    {
-                        this.state.isOpen && <EditModal
-                        onSave={this.handleSave}
-                        closeModal ={this.closeModal}
-                        showModal = {this.state.isOpen}
-                        movie={this.state.movie}
+                        <Pagination
+                            itemsCount={filtered.length}
+                            pageSize={pageSize}
+                            currentPage={currentPage}
+                            onPageChanges={this.handlePageChange}
+                        />
+                        </div>
+                        </div>
                         
-                        /> 
-                    }          
-                </div>    
+                        {
+                            this.state.isOpen && <EditModal
+                            onSave={this.handleSave}
+                            closeModal ={this.closeModal}
+                            showModal = {this.state.isOpen}
+                            movie={this.state.movie}
+                            
+                            /> 
+                        } 
+                    </div> 
+                </div>            
             </React.Fragment>
         );
     }
