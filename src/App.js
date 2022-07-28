@@ -8,6 +8,7 @@ import Notfound from './components/notfound'
 import Posts from './components/posts';
 import Home from './components/home';
 import LoginForm from './components/loginForm'
+import RegisterForm from './components/registerForm';
 class App extends Component {
   state = {  } 
   render() { 
@@ -19,6 +20,7 @@ class App extends Component {
           <Route path="products/:id" element={<ProductDetails/>} />
           <Route exact path='/' element={<Home/>}/> 
           <Route exact path='/login' element={<LoginForm/>}/> 
+          <Route exact path='/register' element={<RegisterForm/>}/> 
           <Route path='/products' element={<Products/>}/> 
           <Route path='/posts' element={<Posts/>}/> 
           <Route path='/dashboard' element={<Movies/>}/> 

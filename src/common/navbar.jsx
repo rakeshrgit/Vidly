@@ -16,6 +16,7 @@ class Navbar extends Component {
                                     <li className="me-3"><NavLink to="/dashboard">Movies</NavLink></li>
                                     <li className="me-3"><NavLink to="/posts">Posts</NavLink></li>
                                     <li className="me-3"><NavLink to="/login">Login</NavLink></li>
+                                    <li className="me-3"><NavLink to="/register">Register</NavLink></li>
                                 </ul>
                             </div>
                         </div>

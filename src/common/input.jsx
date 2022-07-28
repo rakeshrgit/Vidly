@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
 
-const Input = ({name, label, value, error, onChange, type}) => {
+const Input = ({name, label, error, ...rest}) => {
     return ( 
         <div className="mb-3">
             <label htmlFor={name} className="form-label">{label}</label>
             <input 
-                value={value}
-                onChange = {onChange}
-                type={type}
-                className="form-control" 
-                id={name}
+                {...rest}
                 name={name}
+                id={name}
+                className="form-control" 
+               
             />
             {error && <div className="alert alert-danger">{error}</div>}
         </div>
