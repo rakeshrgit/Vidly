@@ -6,6 +6,7 @@ import Pagination from '../common/pagination';
 import ListGroup from '../common/listGroup';
 import {paginate} from '../utils/paginate';
 import MoviesTable from './movieTable';
+import { Outlet, Link, NavLink  } from "react-router-dom";
 class Movies extends Component {
     state = { 
         requiredItem: 0,
@@ -25,6 +26,8 @@ class Movies extends Component {
         const movies = this.state.movies.filter(m=> m._id !== movie._id)
         this.setState({movies})
      }
+
+
      openModal = (movie) =>{ 
         this.setState({ isOpen: true, movie })
     };
@@ -44,13 +47,19 @@ class Movies extends Component {
       isOpen: false
     });
     }
+
+
     handlePageChange = (page) =>{
         this.setState({ currentPage:page });    
         //console.log('page', page)
     }
+
+
     handleGenreSelect = (genre) =>{
        this.setState({ selectedGenre:genre, currentPage: 1 })
     }
+
+    
     handleSort = (path) => {
         console.log('xx')
     }
@@ -80,6 +89,13 @@ class Movies extends Component {
                         </div>
                         <div className="col">
                         <div className="">
+                        <NavLink
+            to="/movies/new"
+            className="btn btn-primary"
+            style={{ marginBottom: 20 }}
+          >
+            New Movie
+          </NavLink>   
                         <div>Showing {filtered.length} movies</div>   
                         <MoviesTable
                             movies ={movies}

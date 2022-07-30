@@ -9,6 +9,7 @@ import Posts from './components/posts';
 import Home from './components/home';
 import LoginForm from './components/loginForm'
 import RegisterForm from './components/registerForm';
+import MovieForm from './components/movieForm';
 class App extends Component {
   state = {  } 
   render() { 
@@ -18,12 +19,13 @@ class App extends Component {
         <Navbar/>
         <Routes>
           <Route path="products/:id" element={<ProductDetails/>} />
-          <Route exact path='/' element={<Home/>}/> 
-          <Route exact path='/login' element={<LoginForm/>}/> 
-          <Route exact path='/register' element={<RegisterForm/>}/> 
-          <Route path='/products' element={<Products/>}/> 
-          <Route path='/posts' element={<Posts/>}/> 
-          <Route path='/dashboard' element={<Movies/>}/> 
+          <Route  path="/" element={<Home/>} exact/> 
+          <Route path="/login" element={<LoginForm/>}/> 
+          <Route path="/movies/:id"  element={<MovieForm/>}/> 
+          <Route path="/register" element={<RegisterForm/>}/> 
+          <Route path="/products" element={<Products/>}/> 
+          <Route path="/posts" element={<Posts/>}/> 
+          <Route path="/movies" element={<Movies/>}/> 
           <Route path="*" element={<Notfound/>}/>
         </Routes>
       </Router>
