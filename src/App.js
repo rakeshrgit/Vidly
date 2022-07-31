@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import http from './services/httpService';
 const apiEndpoint="https://jsonplaceholder.typicode.com/posts"; 
 class App extends Component {
   state = { 
@@ -7,21 +8,21 @@ class App extends Component {
    } 
   
   async componentDidMount() {
-    const {data:posts} = await axios.get('https://jsonplaceholder.typicode.com/posts');
+    const {data:posts} = await http.get(apiEndpoint);
     this.setState({posts})
     //console.log('response', response)
   }
   
   // handleUpdate = (async post) =>{
   //   post.title = "UPDATED";
-  //   const {data} = await axios.put(apiEndpoint + '/' + post.id, post); 
+  //   const {data} = await http.put(apiEndpoint + '/' + post.id, post); 
   // }
 
   handleDelete = async post => {
     const posts = this.state.posts.filter(p => p.id !== post.id);
     this.setState({posts});
     
-    await axios.delete(apiEndpoint + '/' + post.id);
+    await http.delete(apiEndpoint + '/' + post.id);
 
     
   }
