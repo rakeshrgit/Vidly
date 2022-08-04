@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import http from './services/httpService';
 import config from './services/config.json';
-
+import toast, { Toaster } from 'react-hot-toast';
 class App extends Component {
   state = { 
     posts:[]
@@ -22,7 +22,7 @@ class App extends Component {
   handleDelete = async post => {
     const posts = this.state.posts.filter(p => p.id !== post.id);
     this.setState({posts});
-    
+    toast.success('Post Deleted')
     await http.delete(config.apiEndpoint + '/' + post.id);
 
     
@@ -30,6 +30,7 @@ class App extends Component {
   render() { 
     return (
       <main className="container">
+        <Toaster />
          <table className="table">
             <thead>
               <tr>
