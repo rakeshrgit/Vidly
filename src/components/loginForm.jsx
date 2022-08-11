@@ -6,7 +6,8 @@ class LoginForm extends Form {
     state = { 
         data:{
             username:"",
-            password:""
+            password:"",
+            name:""
         },
         errors:{
 
@@ -14,7 +15,8 @@ class LoginForm extends Form {
      }
      schema = {
         username:Joi.string().required().label('Username'),
-        password:Joi.string().required().label('Password')
+        password:Joi.string().required().label('Password'),
+        name:Joi.string().allow('').label('Name')
      }
      
     dosubmit = () => {
@@ -26,6 +28,7 @@ class LoginForm extends Form {
             <div className="container">
                     <form onSubmit={this.handleSubmit}>
                     {this.renderInput('username', 'Username', 'text')}
+                    {this.renderInput('name', 'Name', 'text')}
                     {this.renderInput('password', 'Password', 'password')}
                     {this.renderButton('Login')}    
                     </form>
