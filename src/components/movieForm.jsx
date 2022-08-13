@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Joi from "joi-browser";
 import Form from "../common/form";
-
+import { Link } from "react-router-dom";
 
 class MovieForm extends Form {
   state = {
@@ -40,7 +40,7 @@ class MovieForm extends Form {
       dailyRentalRate: this.state.data.dailyRentalRate
   };
   this.setState({data:formData})
-    this.props.history.push("/movies");
+  this.props.history.push("/movies");
     
   }
 
