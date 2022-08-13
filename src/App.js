@@ -22,10 +22,11 @@ class App extends Component {
           <Route  path="/" element={<Home/>} exact/> 
           <Route path="/login" element={<LoginForm/>}/> 
           <Route path="/movies/:id"  element={<MovieForm/>}/> 
+          <Route path="/movies" element={<Movies/>}/> 
           <Route path="/register" element={<RegisterForm/>}/> 
           <Route path="/products" element={<Products/>}/> 
           <Route path="/posts" element={<Posts/>}/> 
-          <Route path="/movies" element={<Movies/>}/> 
+          
           <Route path="*" element={<Notfound/>}/>
         </Routes>
       </Router>
