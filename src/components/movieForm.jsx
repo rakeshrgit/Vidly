@@ -39,9 +39,8 @@ class MovieForm extends Form {
       numberInStock: this.state.data.numberInStock,
       dailyRentalRate: this.state.data.dailyRentalRate
   };
-  console.log('formData', formData)
   this.setState({data:formData})
-  this.props.history.push("/movies");
+    this.props.history.push("/movies");
     
   }
 
