@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import Joi from "joi-browser";
+import { saveMovie } from '../services/fakeMovieService';
 import Form from "../common/form";
 import { Link } from "react-router-dom";
-
+import { Navigate } from "react-router-dom";
 class MovieForm extends Form {
   state = {
     data: {
       title: "",
-     
       numberInStock: "",
       dailyRentalRate: ""
     },
@@ -39,14 +39,18 @@ class MovieForm extends Form {
       numberInStock: this.state.data.numberInStock,
       dailyRentalRate: this.state.data.dailyRentalRate
   };
-  this.setState({data:formData})
-  this.props.history.push("/movies");
+  saveMovie(formData);
+  this.setState({data:formData, submission:true})
+  console.log('formData', formData)
+  //this.props.history.push("/movies");
     
   }
-
+ 
+   
 render() {
     return (
       <div>
+        {this.state.submission &&  <Navigate to="/movies" replace={true} />}
         <div className="container">
           <h1>Movie Form</h1>
           <form onSubmit={this.handleSubmit}>

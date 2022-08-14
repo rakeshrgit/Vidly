@@ -27,10 +27,10 @@ class Form extends Component {
     handleSubmit = e => {
         e.preventDefault();
         const errors = this.validate();
-        //console.log(errors);
+       
         this.setState({ errors:errors || {} });
         if (errors) return;
-        this.dosubmit()
+       //this.dosubmit()
     };
     
     handleChange = ({currentTarget:input}) =>{
