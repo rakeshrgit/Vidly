@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import AppFunction from './AppF';
 const apiEndpoint="https://jsonplaceholder.typicode.com/posts"; 
 class App extends Component {
   state = { 
@@ -28,7 +29,7 @@ class App extends Component {
   render() { 
     return (
       <main className="container">
-         <table className="table">
+         {/* <table className="table">
             <thead>
               <tr>
                 <th>Title</th>
@@ -46,7 +47,8 @@ class App extends Component {
                ))} 
 
             </tbody>
-         </table>
+         </table> */}
+         <AppFunction />
       </main>
     );
   }
