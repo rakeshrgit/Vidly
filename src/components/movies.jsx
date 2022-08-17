@@ -7,6 +7,8 @@ import ListGroup from '../common/listGroup';
 import {paginate} from '../utils/paginate';
 import MoviesTable from './movieTable';
 import { Outlet, Link, NavLink  } from "react-router-dom";
+import SearchBox from './searchBox';
+import _ from "lodash";
 class Movies extends Component {
     state = { 
         requiredItem: 0,
@@ -15,6 +17,7 @@ class Movies extends Component {
         movie: null,
         isOpen:false,
         pageSize:4,
+        searchQuery: "",
         currentPage:1
      } 
      componentDidMount() {
@@ -27,6 +30,7 @@ class Movies extends Component {
         this.setState({movies})
      }
 
+    
 
      openModal = (movie) =>{ 
         this.setState({ isOpen: true, movie })
@@ -56,25 +60,48 @@ class Movies extends Component {
 
 
     handleGenreSelect = (genre) =>{
-       this.setState({ selectedGenre:genre, currentPage: 1 })
+       this.setState({ selectedGenre:genre, searchQuery: "", currentPage: 1 })
     }
 
+    handleSearch = query => {
+        this.setState({ searchQuery: query, selectedGenre: null, currentPage: 1 });
+      };
+      
     
     handleSort = (path) => {
         console.log('xx')
     }
+    getPagedData = () => {
+        const {
+          pageSize,
+          currentPage,
+          sortColumn,
+          selectedGenre,
+          searchQuery,
+          movies: allMovies
+        } = this.state;
+    
+        let filtered = allMovies;
+        if (searchQuery)
+          filtered = allMovies.filter(m =>
+            m.title.toLowerCase().startsWith(searchQuery.toLowerCase())
+          );
+        else if (selectedGenre && selectedGenre._id)
+          filtered = allMovies.filter(m => m.genre._id === selectedGenre._id);
+    
+        const sorted = _.orderBy(filtered);
+    
+        const movies = paginate(sorted, currentPage, pageSize);
+    
+        return { totalCount: filtered.length, data: movies };
+      };
     render() { 
-        const {length: count} = this.state.movies;
-        const {pageSize, currentPage, selectedGenre, movies:allMovies} = this.state;
-        const filtered =
-        selectedGenre && selectedGenre._id
-          ? allMovies.filter(m => m.genre._id === selectedGenre._id)
-          : allMovies;
+        const { length: count } = this.state.movies;
+    const { pageSize, currentPage,  searchQuery } = this.state;
 
-        const movies = paginate(filtered, currentPage, pageSize  )
-        //const{movies} = this.state;
-       // console.log('movies', movies)
-       if (movies.length === 0) return <p>No Data</p>;
+    if (count === 0) return <p>There are no movies in the database.</p>;
+
+    const { totalCount, data: movies } = this.getPagedData();
         return (
             <React.Fragment>
                 <div className="container">    
@@ -88,6 +115,7 @@ class Movies extends Component {
                             />
                         </div>
                         <div className="col">
+                         <SearchBox value={searchQuery} onChange={this.handleSearch} />   
                         <div className="">
                         <NavLink
             to="/movies/new"
@@ -96,14 +124,14 @@ class Movies extends Component {
           >
             New Movie
           </NavLink>   
-                        <div>Showing {filtered.length} movies</div>   
+                        <div>Showing {totalCount} movies</div>   
                         <MoviesTable
                             movies ={movies}
                             onDelete={this.handleDelete}
                             onOpenModal = {this.openModal}
                         />
                         <Pagination
-                            itemsCount={filtered.length}
+                            itemsCount={totalCount}
                             pageSize={pageSize}
                             currentPage={currentPage}
                             onPageChanges={this.handlePageChange}

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 const MoviesTable = (props) => {
     const {movies, onDelete, onOpenModal, onSort} = props;
+    console.log('props', props)
     return ( 
         <table className="table">
             <thead>
