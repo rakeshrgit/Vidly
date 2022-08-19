@@ -7,6 +7,7 @@ const ListGroup = (props) => {
         currentItem, 
         onItemSelect 
     } = props;
+    //console.log('post categories', currentItem)  
     return <ul className="list-group">
         {
             items.map(item=>(
