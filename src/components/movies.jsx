@@ -20,6 +20,7 @@ class Movies extends Component {
         const genres = [{ _id: "", name: "All Genres" }, ...getGenres()];
 
         this.setState({ movies: getMovies(), genres });
+        console.log('movies', genres);
      }
      handleDelete = (movie) => {
         const movies = this.state.movies.filter(m=> m._id !== movie._id)
@@ -50,6 +51,7 @@ class Movies extends Component {
     }
     handleGenreSelect = (genre) =>{
        this.setState({ selectedGenre:genre, currentPage: 1 })
+       console.log('genre', genre)
     }
     handleSort = (path) => {
         console.log('xx')
